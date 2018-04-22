@@ -41,23 +41,10 @@ public class Q7 {
 				+ "\nResults Count: " + hitsCount
 				+ "\nResults: ");
 
-		/*for (int i = 0; i < hitsCount; i++) {
-			SearchHit hit = hits.getAt(i);
-			System.out.println("[" + hit.getScore() + "] "
-					+ hit.getSourceAsString());
-		}*/
 		Terms terms = response.getAggregations().get("speakers");
 		for (Terms.Bucket entry : terms.getBuckets()) {
-			System.out.println(entry.getKey() + " " +       // Term
-					entry.getDocCount()); // Doc count
+			System.out.println(entry.getKey() + " has " + entry.getDocCount() +  " lines.");
 		}
-		/*SignificantTerms agg = response.getAggregations().get("speaker");
-
-		// For each entry
-		for (SignificantTerms.Bucket entry : agg.getBuckets()) {
-			System.out.println(entry.getKey() + " " +       // Term
-			entry.getDocCount()); // Doc count
-		}*/
 
 		// IMPORTANT // Close ElasticSearch client
 		Utils.closeClient(client);
